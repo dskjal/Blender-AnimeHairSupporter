@@ -34,11 +34,9 @@ class ahs_convert_curve_to_edgemesh(bpy.types.Operator):
 			if curve.taper_object:
 				temp_ob = curve.taper_object
 				context.blend_data.curves.remove(temp_ob.data, do_unlink=True)
-				context.blend_data.objects.remove(temp_ob, do_unlink=True)
 			if curve.bevel_object:
 				temp_ob = curve.bevel_object
 				context.blend_data.curves.remove(temp_ob.data, do_unlink=True)
-				context.blend_data.objects.remove(temp_ob, do_unlink=True)
 			
 			# 頂点/辺情報を格納
 			for spline in splines:
@@ -47,7 +45,6 @@ class ahs_convert_curve_to_edgemesh(bpy.types.Operator):
 					new_verts.append( ob.matrix_world * mathutils.Vector(point.co[:3]) )
 			
 			context.blend_data.curves.remove(ob.data, do_unlink=True)
-			context.blend_data.objects.remove(ob, do_unlink=True)
 		
 		me = context.blend_data.meshes.new(name)
 		me.from_pydata(new_verts, new_edges, [])

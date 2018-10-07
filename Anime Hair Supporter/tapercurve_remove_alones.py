@@ -38,7 +38,6 @@ class ahs_tapercurve_remove_alones(bpy.types.Operator):
 				name = re.sub(r'\.\d{3,}$', "", ob.name)
 				if re.search(r':Taper$', name) and ob not in taper_objects:
 					context.blend_data.curves.remove(ob.data, do_unlink=True)
-					context.blend_data.objects.remove(ob, do_unlink=True)
 		
 		if self.mode != 'TAPER':
 			bevel_objects = []
@@ -49,7 +48,6 @@ class ahs_tapercurve_remove_alones(bpy.types.Operator):
 				name = re.sub(r'\.\d{3,}$', "", ob.name)
 				if re.search(r':Bevel$', name) and ob not in bevel_objects:
 					context.blend_data.curves.remove(ob.data, do_unlink=True)
-					context.blend_data.objects.remove(ob, do_unlink=True)
 		
 		for area in context.screen.areas: area.tag_redraw()
 		return {'FINISHED'}

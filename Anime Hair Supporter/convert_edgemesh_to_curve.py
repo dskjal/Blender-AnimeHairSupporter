@@ -108,7 +108,6 @@ class ahs_convert_edgemesh_to_curve(bpy.types.Operator):
 			
 			if self.is_remove_mesh:
 				context.blend_data.meshes.remove(ob.data, do_unlink=True)
-				context.blend_data.objects.remove(ob, do_unlink=True)
 		
 		# 新規オブジェクトをアクティブ＆選択
 		if len(new_objects): context.scene.objects.active = new_objects[0]

@@ -50,12 +50,10 @@ class ahs_maincurve_volume_up(bpy.types.Operator):
 			if curve.taper_object:
 				if len([c.taper_object for c in context.blend_data.curves if c.taper_object == curve.taper_object]) == 1:
 					o, c = curve.taper_object, curve.taper_object.data
-					if o: context.blend_data.objects.remove(o, do_unlink=True)
 					if c: context.blend_data.curves.remove(c, do_unlink=True)
 			if curve.bevel_object:
 				if len([c.bevel_object for c in context.blend_data.curves if c.bevel_object == curve.bevel_object]) == 1:
 					o, c = curve.bevel_object, curve.bevel_object.data
-					if o: context.blend_data.objects.remove(o, do_unlink=True)
 					if c: context.blend_data.curves.remove(c, do_unlink=True)
 			
 			# テーパーオブジェクトをアペンドして割り当て

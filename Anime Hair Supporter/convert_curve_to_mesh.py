@@ -134,7 +134,6 @@ class ahs_convert_curve_to_mesh(bpy.types.Operator):
 		# 必要なくなったテーパー/ベベルを完全削除
 		for ob in taper_and_bevel_objects:
 			context.blend_data.curves.remove(ob.data, do_unlink=True)
-			context.blend_data.objects.remove(ob, do_unlink=True)
 		
 		context.tool_settings.mesh_select_mode = pre_mesh_select_mode
 		return {'FINISHED'}
