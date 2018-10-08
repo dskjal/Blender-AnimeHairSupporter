@@ -5,7 +5,7 @@ bl_info = {
 	'name' : "Anime Hair Supporter",
 	'author' : "saidenka",
 	'version' : (1, 0),
-	'blender' : (2, 7, 8),
+	'blender' : (2, 79, 0),
 	'location' : "3Dビュー > オブジェクトモード > ツールシェルフ > ツール > アニメ髪支援パネル",
 	'description' : "",
 	'warning' : "",
