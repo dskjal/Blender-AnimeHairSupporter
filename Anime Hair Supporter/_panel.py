@@ -27,7 +27,7 @@ class VIEW3D_PT_tools_anime_hair_supporter(bpy.types.Panel):
 		row = box.row(align=True)
 		row.prop(props, 'maincurve_expand', text="メインカーブ", icon='MAN_ROT', emboss=False)
 		row.operator('object.ahs_maincurve_activate', text="", icon='ZOOM_SELECTED')
-		row.label("", icon='BLANK1')
+		row.label(text="", icon='BLANK1')
 		
 		if props.maincurve_expand:
 			
