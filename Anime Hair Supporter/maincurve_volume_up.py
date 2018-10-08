@@ -17,12 +17,10 @@ class ahs_maincurve_volume_up(bpy.types.Operator):
 	
 	@classmethod
 	def poll(cls, context):
-		try:
-			for ob in context.selected_objects:
-				if ob.type == 'CURVE': break
-			else: return False
-		except: return False
-		return True
+		for ob in context.selected_objects:
+			if ob.type == 'CURVE': 
+				return True
+		return False
 	
 	def draw(self, context):
 		self.layout.prop(self, 'taper_type')
@@ -56,27 +54,28 @@ class ahs_maincurve_volume_up(bpy.types.Operator):
 					o, c = curve.bevel_object, curve.bevel_object.data
 					if c: context.blend_data.curves.remove(c, do_unlink=True)
 			
+			# テーパー・ベベルオブジェクトをアペンドして割り当てる関数。(taper_curve_ob, taper_curve) か (bevel_curve_ob, bevel_curve) を返す
+			# tb_type には 'taper' か 'bevel' かを指定する
+			def load_taper_or_bevel(tb_type):
+				nonlocal self
+				with context.blend_data.libraries.load(blend_path) as (data_from, data_to):
+					data_to.objects = [tb_type.capitalize() + "." + eval('self.'+tb_type+'_type')]
+				ob = data_to.objects[0]
+				data = ob.data
+				name = ob.name + ":" + tb_type.capitalize()
+				ob.name, data.name = name, name
+				ob.select = False
+				context.scene.objects.link(ob)
+				nonlocal curve
+				exec('curve.' + tb_type + '_object = ob')
+				return ob, data
+
 			# テーパーオブジェクトをアペンドして割り当て
-			with context.blend_data.libraries.load(blend_path) as (data_from, data_to):
-				data_to.objects = ["Taper." + self.taper_type]
-			taper_curve_ob = data_to.objects[0]
-			taper_curve = taper_curve_ob.data
-			name = ob.name + ":Taper"
-			taper_curve_ob.name, taper_curve.name = name, name
-			taper_curve_ob.select = False
-			context.scene.objects.link(taper_curve_ob)
-			curve.taper_object = taper_curve_ob
+			taper_curve_ob, taper_curve = load_taper_or_bevel('taper')
 			
 			# ベベルオブジェクトをアペンドして割り当て
-			with context.blend_data.libraries.load(blend_path) as (data_from, data_to):
-				data_to.objects = ["Bevel." + self.bevel_type]
-			bevel_curve_ob = data_to.objects[0]
-			bevel_curve = bevel_curve_ob.data
-			name = ob.name + ":Bevel"
-			bevel_curve_ob.name, bevel_curve.name = name, name
-			bevel_curve_ob.select = False
-			context.scene.objects.link(bevel_curve_ob)
-			curve.bevel_object = bevel_curve_ob
+			bevel_curve_ob, bevel_curve = load_taper_or_bevel('bevel')
+
 			# 左右反転処理
 			if self.is_bevel_mirror:
 				co_list = [list(p.co) for p in bevel_curve.splines[0].points]
@@ -89,7 +88,7 @@ class ahs_maincurve_volume_up(bpy.types.Operator):
 			_common.relocation_taper_and_bevel(ob, bevel_curve_ob, False)
 			
 			# 拡縮変更
-			taper_curve_ob.scale = (self.scale, self.scale, self.scale)
+			taper_curve_ob.scale = [self.scale] * 3
 			bevel_curve_ob.scale = (self.scale, self.scale * self.scale_y_multi * 0.01, self.scale)
 		
 		return {'FINISHED'}
