@@ -51,17 +51,17 @@ class VIEW3D_PT_tools_anime_hair_supporter(bpy.types.Panel):
 			
 			# 解像度
 			row = column.row(align=True)
-			try: is_successed = context.active_object.data.taper_object and context.active_object.data.bevel_object and context.active_object.data.splines.active
-			except: is_successed = False
-			if is_successed: row.prop(context.active_object.data.splines.active, 'resolution_u', text="解像度")
-			else: row.label(text="解像度:")
+			try: 
+				row.prop(context.active_object.data.splines.active, 'resolution_u', text="解像度")
+			except:
+				row.label(text="解像度:")
 			row.operator('object.ahs_maincurve_set_resolution', text="", icon='PREFERENCES')
 			# 次数
 			row = column.row(align=True)
-			try: is_successed = context.active_object.data.taper_object and context.active_object.data.bevel_object and context.active_object.data.splines.active
-			except: is_successed = False
-			if is_successed: row.prop(context.active_object.data.splines.active, 'order_u', text="次数")
-			else: row.label(text="次数:")
+			try:
+				row.prop(context.active_object.data.splines.active, 'order_u', text="次数")
+			except:
+				row.label(text="次数:")
 			row.operator('object.ahs_maincurve_set_order', text="", icon='PREFERENCES')
 		
 		
@@ -100,16 +100,13 @@ class VIEW3D_PT_tools_anime_hair_supporter(bpy.types.Panel):
 			row = column.row(align=True)
 			try:
 				row.prop(context.active_object.data.taper_object.data.splines.active, 'resolution_u', text="解像度")
-				is_successed = True
-			except: is_successed = False
-			if not is_successed:
+			except:
 				taper_objects = [c.taper_object for c in context.blend_data.curves if c.taper_object]
 				try:
 					if context.active_object in taper_objects:
 						row.prop(context.active_object.data.splines.active, 'resolution_u', text="解像度")
-						is_successed = True
-				except: is_successed = False
-			if not is_successed: row.label(text="解像度:")
+				except:
+					row.label(text="解像度:")
 			row.operator('object.ahs_maincurve_set_resolution', text="", icon='PREFERENCES')
 		
 		
@@ -148,16 +145,13 @@ class VIEW3D_PT_tools_anime_hair_supporter(bpy.types.Panel):
 			row = column.row(align=True)
 			try:
 				row.prop(context.active_object.data.bevel_object.data.splines.active, 'resolution_u', text="解像度")
-				is_successed = True
-			except: is_successed = False
-			if not is_successed:
+			except: 
 				bevel_objects = [c.bevel_object for c in context.blend_data.curves if c.bevel_object]
 				try:
 					if context.active_object in bevel_objects:
 						row.prop(context.active_object.data.splines.active, 'resolution_u', text="解像度")
-						is_successed = True
-				except: is_successed = False
-			if not is_successed: row.label(text="解像度:")
+				except:
+					row.label(text="解像度:")
 			row.operator('object.ahs_maincurve_set_resolution', text="", icon='PREFERENCES')
 		
 		
