@@ -74,21 +74,51 @@ else:
 # この位置に記述 (重要)
 import bpy
 
+class AHS_Props(bpy.types.PropertyGroup):
+	maincurve_expand = bpy.props.BoolProperty(name="メインパネルを展開", default=True)
+	tapercurve_expand = bpy.props.BoolProperty(name="テーパーパネルを展開", default=True)
+	bevelcurve_expand = bpy.props.BoolProperty(name="ベベルパネルを展開", default=True)
+
+classes = (
+	convert_curve_to_armature.ahs_convert_curve_to_armature,
+	convert_curve_to_edgemesh.ahs_convert_curve_to_edgemesh,
+	convert_curve_to_mesh.ahs_convert_curve_to_mesh,
+	convert_edgemesh_to_curve.ahs_convert_edgemesh_to_curve,
+	maincurve_activate.ahs_maincurve_activate,
+	maincurve_extra_deform.ahs_maincurve_extra_deform,
+	maincurve_gradation_tilt.ahs_maincurve_gradation_tilt,
+	maincurve_hide.ahs_maincurve_hide,
+	maincurve_select.ahs_maincurve_select,
+	maincurve_set_order.ahs_maincurve_set_order,
+	maincurve_set_resolution.ahs_maincurve_set_resolution,
+	maincurve_volume_down.ahs_maincurve_volume_down,
+	maincurve_volume_up.ahs_maincurve_volume_up,
+	tapercurve_activate.ahs_tapercurve_activate,
+	tapercurve_change_type.ahs_tapercurve_change_type,
+	tapercurve_hide.ahs_tapercurve_hide,
+	tapercurve_id_singlize.ahs_tapercurve_id_singlize,
+	tapercurve_mirror.ahs_tapercurve_mirror,
+	tapercurve_relocation.ahs_tapercurve_relocation,
+	tapercurve_remove_alones.ahs_tapercurve_remove_alones,
+	tapercurve_select.ahs_tapercurve_select,
+	_panel.VIEW3D_PT_tools_anime_hair_supporter,
+	AHS_Props
+)
+
 # プラグインをインストールしたときの処理
 def register():
-	
-	class AHS_Props(bpy.types.PropertyGroup):
-		maincurve_expand = bpy.props.BoolProperty(name="メインパネルを展開", default=True)
-		tapercurve_expand = bpy.props.BoolProperty(name="テーパーパネルを展開", default=True)
-		bevelcurve_expand = bpy.props.BoolProperty(name="ベベルパネルを展開", default=True)
-	
-	bpy.utils.register_module(__name__)
+		
+	for cls in classes:
+		bpy.utils.register_class(cls)
+
 	bpy.types.Scene.ahs_props = bpy.props.PointerProperty(type=AHS_Props)
 
 # プラグインをアンインストールしたときの処理
 def unregister():
 	if bpy.context.scene.get('ahs_props'): del bpy.context.scene['ahs_props']
-	bpy.utils.unregister_module(__name__)
+	
+	for cls in classes:
+		bpy.utils.unregister_class(cls)
 
 # 最初に実行される
 if __name__ == '__main__':
