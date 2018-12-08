@@ -117,7 +117,7 @@ def register():
 def unregister():
 	if bpy.context.scene.get('ahs_props'): del bpy.context.scene['ahs_props']
 	
-	for cls in classes:
+	for cls in reversed(classes):
 		bpy.utils.unregister_class(cls)
 
 # 最初に実行される
