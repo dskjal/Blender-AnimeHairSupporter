@@ -31,7 +31,7 @@ def get_bevel_enum_items():
 		('Diamond', "ひし形", "", 'SPACE3'),
 		('DiamondLoose', "ゆるやかひし形", "", 'KEYTYPE_EXTREME_VEC'),
 		('Sharp', "シャープ", "", 'LINCURVE'),
-		('Leaf', "葉っぱ", "", 'MAN_ROT'),
+		('Leaf', "葉っぱ", "", 'DRIVER_ROTATIONAL_DIFFERENCE'),
 		('V', "切り込み", "", 'FILE_TICK'),
 		('Tilde', "波", "", 'IPO_EASE_IN_OUT'),
 		('Step', "段差", "", 'IPO_CONSTANT'),

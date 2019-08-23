@@ -31,8 +31,8 @@ class ahs_tapercurve_relocation(bpy.types.Operator):
 		self.layout.prop(self, 'mode')
 		
 		row = self.layout.row(align=True)
-		row.prop(self, 'is_location', icon='MAN_TRANS', toggle=True)
-		row.prop(self, 'is_rotation', icon='MAN_ROT', toggle=True)
+		row.prop(self, 'is_location', icon='DRIVER_TRANSFORM', toggle=True)
+		row.prop(self, 'is_rotation', icon='DRIVER_ROTATIONAL_DIFFERENCE', toggle=True)
 	
 	def execute(self, context):
 		if self.mode == 'TAPER': taper_or_bevel_objects = [c.taper_object for c in context.blend_data.curves if c.taper_object]
