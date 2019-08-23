@@ -29,5 +29,5 @@ class ahs_tapercurve_hide(bpy.types.Operator):
 		else: taper_or_bevel_objects = [c.taper_object for c in context.blend_data.curves if c.taper_object] + [c.bevel_object for c in context.blend_data.curves if c.bevel_object]
 		
 		for ob in taper_or_bevel_objects:
-			ob.hide = self.is_hide
+			ob.hide_viewport = self.is_hide
 		return {'FINISHED'}

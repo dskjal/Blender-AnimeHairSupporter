@@ -41,7 +41,7 @@ class ahs_convert_curve_to_armature(bpy.types.Operator):
 			total_curve_point_length = sum(curve_point_lengths)
 			curve_point_ratios = [l / total_curve_point_length for l in curve_point_lengths]
 			
-			temp_me = ob.to_mesh(context.scene, False, 'PREVIEW')
+			temp_me = ob.to_mesh(context.depsgraph, False)
 			
 			ob.data = pre_curve
 			context.blend_data.curves.remove(temp_curve, do_unlink=True)
@@ -86,8 +86,8 @@ class ahs_convert_curve_to_armature(bpy.types.Operator):
 		context.scene.collection.objects.link(new_ob)
 		new_ob.select_set(True)
 		context.view_layer.objects.active = new_ob
-		new_ob.show_x_ray = True
-		new_arm.draw_type = 'STICK'
+		new_ob.show_in_front = True
+		new_arm.display_type = 'STICK'
 		
 		bpy.ops.object.mode_set(mode='EDIT')
 		
