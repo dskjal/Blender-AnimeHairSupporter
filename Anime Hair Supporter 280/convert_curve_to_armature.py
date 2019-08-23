@@ -46,7 +46,7 @@ class ahs_convert_curve_to_armature(bpy.types.Operator):
 			ob.data = pre_curve
 			context.blend_data.curves.remove(temp_curve, do_unlink=True)
 			
-			vert_cos = [ob.matrix_world * v.co for v in temp_me.vertices]
+			vert_cos = [ob.matrix_world @ v.co for v in temp_me.vertices]
 			vert_lengths = [0]
 			for index, co in enumerate(vert_cos):
 				if index == 0: continue
