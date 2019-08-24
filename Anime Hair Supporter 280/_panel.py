@@ -10,6 +10,12 @@ class VIEW3D_PT_tools_anime_hair_supporter(bpy.types.Panel):
 	
 	def draw(self, context):
 		props = context.scene.ahs_props
+
+		# ショートカット
+		column = self.layout.column(align=True)
+		row = column.row(align=True)
+		row.prop(context.space_data.overlay, 'show_wireframes', text='')
+		row.prop(context.space_data.overlay, 'wireframe_threshold', text="wireframe")
 		
 		# コンバーターズ
 		column = self.layout.column(align=True)
