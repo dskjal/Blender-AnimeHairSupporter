@@ -27,5 +27,8 @@ class ahs_maincurve_select(bpy.types.Operator):
 		if context.active_object not in target_objects:
 			target_objects.sort(key=lambda ob: ob.name)
 			context.view_layer.objects.active = target_objects[0]
+
+		bpy.ops.object.select_all(action='DESELECT')
+		
 		for ob in target_objects: ob.select_set(True)
 		return {'FINISHED'}
