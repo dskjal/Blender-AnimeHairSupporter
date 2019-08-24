@@ -15,7 +15,9 @@ class VIEW3D_PT_tools_anime_hair_supporter(bpy.types.Panel):
 		column = self.layout.column(align=True)
 		row = column.row(align=True)
 		row.prop(context.space_data.overlay, 'show_wireframes', text='')
-		row.prop(context.space_data.overlay, 'wireframe_threshold', text="wireframe")
+		row.prop(context.space_data.overlay, 'wireframe_threshold', text='ワイヤーフレーム')
+		column.separator()
+		column.separator()
 		
 		# コンバーターズ
 		column = self.layout.column(align=True)
