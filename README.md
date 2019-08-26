@@ -1,5 +1,5 @@
 # Blender-AnimeHairSupporter
-Blender 2.80 はツールの位置が「サイドバー（N）> ツール > アニメ髪支援」に変更されている。  
+Blender 2.80 対応版は Anime Hair Supporter 280 に入っている。Blender 2.80 はツールの位置が「サイドバー（N）> ツール > アニメ髪支援」に変更されている。  
 
 # 使い方
 1. カーブを作成する
