@@ -1,0 +1,20 @@
+schema_version = "1.0.0"
+
+id = "anime_hair_supporter"
+version = "1.0.0"
+name = "Anime Hair Supporter"
+tagline = "カーブを使って髪を生成しポリゴン化する"
+maintainer = "saidenka, migrated by dskjal <email@address.com>"
+type = "add-on"
+website = "https://github.com/dskjal/Blender-AnimeHairSupporter"
+tags = ["Modeling", "Mesh"]
+blender_version_min = "4.2.0"
+
+# https://spdx.org/licenses/ ("SPDX: プリフィックスを指定) に適合するライセンス
+# https://docs.blender.org/manual/en/dev/advanced/extensions/licenses.html
+license = [
+  "SPDX:GPL-2.0-or-later",
+]
+
+[permissions]
+files = "ディスクから髪型ファイルをインポートする"
